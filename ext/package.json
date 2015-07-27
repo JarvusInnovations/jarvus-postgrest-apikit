@@ -1,0 +1,24 @@
+{
+  "name": "ext",
+  "format": "1",
+  "version": "5.1.1.451",
+  "compatVersion": "4.0",
+  "creator": "Sencha",
+  "summary": "Ext JS",
+  "detailedDescription": "Sencha Ext JS JavaScript Framework",
+  "type": "framework",
+  "requires": [
+    "sencha-core"
+  ],
+  "signatures": [
+    {
+      "name": "Sencha",
+      "uuid": "e93ebd09-85f5-46b6-bfc1-c7f06cf0b8a5",
+      "created": "2015-05-07T21:32:49Z",
+      "algorithm": "SHA1withRSA",
+      "nonce": "pZANMCSnxZY\u003d",
+      "signature": "dGCQki9l8Yd04fY+TPAM8YqucW8/IOexJ8lhI/BO8j2jw3kPa/QEbsR/cCojA71iRdkeBQehWo8GcN9hyUWmE/KzGfFCHYsFvuJPNFWLXd5NvBxzNmR3gmmBO66oQ7QgNUviEQ+z5LrvRK2BS+XM85D7BgB1EU8xTKdBeNMlN2DoOrBfHdpCq8I9YLNH15nEljT+0DrXoag+yE5/69B1MXNzhq5rD8B4wVim7clZyroVxj6eLuNjDXLu10nLtKjj9a7fkqYNqftnb03HziHwp7lnuSe6f1GNlg0sLyPdZsFfLX2r4HJhUsMrqRE33gxv+UHZIFBFPlEFzbBr3gnEAjHIbPDulCFwjFf/Kqx+hPw63iuvuG1U05F9yqr5bR1LxnPwI05uGEwClHEo3UepOxkIXWZGADCk5pPSMECKGmTMTlC3ShESoT/1uivqckBjGhdRTnFHk5DGL93t9EkD+1OWJZUhNATJ6PqyNtKA8ZkCkQWuu+Hk8MFeX3AqOfQ2PAPVXY7H/lpFihheRvJPo3vy38HccxgavntLVsqh6fCHF0XN+offQnTadmIwpigiu9wlxkYRrkiZjucF2wm9uJ9Awwz+IeJD8fd3ntdIhzf4M8MUyZaadgtrOX3U0yxbjjPq/r868O7CLk78eHaVCu3+TuyclTx9LyCuWMDjcmM\u003d"
+    }
+  ],
+  "output": "${package.dir}/build"
+}
