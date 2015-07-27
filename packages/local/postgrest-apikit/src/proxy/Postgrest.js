@@ -97,8 +97,8 @@ Ext.define('Jarvus.proxy.Postgrest', {
             idProp = record.getIdProperty();
             url += '?' + idProp + '=eq.' + id;
         }
-
-        request.url = url;
+ 
+        request.setUrl(url);
 
         return me.callParent(arguments);
     },
