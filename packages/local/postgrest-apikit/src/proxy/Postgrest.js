@@ -1,7 +1,9 @@
 Ext.define('Jarvus.proxy.Postgrest', {
-    extend: 'Ext.data.proxy.Rest',
-    alternateClassName: 'Jarvus.proxy.PostgrestProxy',
+    extend: 'Jarvus.proxy.API',
     alias : 'proxy.postgrest',
+    requires: [
+        'Jarvus.connection.Postgrest'
+    ],
 
     /**
      * @property {Object} actionMethods
@@ -12,6 +14,8 @@ Ext.define('Jarvus.proxy.Postgrest', {
      */
 
     config: {
+        connection: 'Jarvus.connection.Postgrest',
+
         /**
          * @cfg {Boolean} appendId
          * True to automatically append the ID of a Model instance when performing a request based on that single instance.
@@ -302,5 +306,9 @@ Ext.define('Jarvus.proxy.Postgrest', {
         });
         
         return params;
+    },
+
+    isValidId: function(id) {
+        return id || id === 0;
     }
 });
