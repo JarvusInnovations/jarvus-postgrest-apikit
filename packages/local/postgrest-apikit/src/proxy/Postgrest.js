@@ -72,6 +72,7 @@ Ext.define('Jarvus.proxy.Postgrest', {
             record    = records[0],
             format    = me.format,
             url       = me.getUrl(request),
+            urlParams = {},
             id        = record ? record.getId() : '',
             idProp;
 
@@ -91,14 +92,13 @@ Ext.define('Jarvus.proxy.Postgrest', {
             url += format;
         }
 
-        debugger;
-        // @themightychris: tried to use params here too
         if (operation.isUpdateOperation) {
             idProp = record.getIdProperty();
-            url += '?' + idProp + '=eq.' + id;
+            urlParams[idProp] = 'eq.' + id;
         }
  
         request.setUrl(url);
+        request.setUrlParams(urlParams);
 
         return me.callParent(arguments);
     },
