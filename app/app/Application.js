@@ -22,6 +22,9 @@ Ext.define('PostgrestTest.Application', {
 
         if (pageParams.postgrestHost) {
             Jarvus.connection.Postgrest.setHost(pageParams.postgrestHost);
+        } else {
+            Jarvus.connection.Postgrest.setHost('staging.sparkpoint.slatepowered.net');
+            Jarvus.connection.Postgrest.setPathPrefix('/spark2/postgrest');
         }
     },
 
