@@ -26,18 +26,6 @@ Ext.define('PostgrestTest.Application', {
     },
 
     launch: function () {
-        // Ext.getStore('PostgrestTest.store.Jurisdictions').load({callback: function loaded() {
-        //     debugger;
-
-        //     var store = Ext.getStore('PostgrestTest.store.Jurisdictions');
-
-        //     store.filter([{
-        //         property: 'title',
-        //         operator: 'in',
-        //         value:    ['Pennsylvania', 'New Jersey', 'Delaware']
-        //     }]);
-        // }});
-
         // export fun stuff to global for console
         window.jurisdictionsStore = this.getJurisdictionsStore();
         window.jurisdictionsGrid = this.getMainView();
