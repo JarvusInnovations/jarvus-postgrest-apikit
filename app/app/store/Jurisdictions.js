@@ -13,15 +13,13 @@ Ext.define('PostgrestTest.store.Jurisdictions', {
 
     proxy: {
         type: 'postgrest',
-        url:  '/jurisdictions'
-    },
-
+        url:  '/jurisdictions',
     reader: {
         type: 'postgrest'
     },
-
     writer: {
         type: 'json'
+    },
     },
 
     remoteSort:   true,
