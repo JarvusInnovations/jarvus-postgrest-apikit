@@ -1,3 +1,8 @@
+/**
+ * Implements a PostgREST backend
+ * 
+ * See https://github.com/begriffs/postgrest/wiki/Routing
+ */
 Ext.define('Jarvus.proxy.Postgrest', {
     extend: 'Jarvus.proxy.API',
     alias : 'proxy.postgrest',
