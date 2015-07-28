@@ -7,6 +7,7 @@ Ext.define('Jarvus.connection.AbstractPostgrest', {
     extend: 'Jarvus.util.AbstractAPI',
 
 	config: {
-        host: 'localhost:3000'
+        host: 'localhost:3000',
+		withCredentials: false
     }
 });
