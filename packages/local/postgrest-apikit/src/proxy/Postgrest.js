@@ -15,7 +15,11 @@ Ext.define('Jarvus.proxy.Postgrest', {
         actionMethods: {
             update: 'PATCH'
         },
-        
+
+        headers: {
+            Prefer: 'return=representation'
+        },
+
         writer: {
             type: 'postgrest'
         }
