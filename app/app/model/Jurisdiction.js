@@ -8,8 +8,19 @@ Ext.define('PostgrestTest.model.Jurisdiction', {
     identifier: 'negative',
 
     fields: [
-        { name: 'id', type: 'int', persist: false },
-        { name: 'title', type: 'string' },
+        {
+            name: 'id',
+            type: 'int',
+            validators: {
+                type: 'range',
+                min: 1
+            }
+        },
+        {
+            name: 'title',
+            type: 'string',
+            validators: 'presence'
+        },
         { name: 'type', type: 'string' },
         { name: 'document', type: 'string' }
     ]
