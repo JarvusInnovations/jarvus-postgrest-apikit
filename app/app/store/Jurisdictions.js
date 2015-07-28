@@ -7,32 +7,32 @@ Ext.define('PostgrestTest.store.Jurisdictions', {
 
     model: 'PostgrestTest.model.Jurisdiction',
 
-    pageSize: 5,
+    // pageSize: 5,
 
     proxy: {
         type: 'postgrest',
         url:  '/jurisdictions',
-        reader: {
-            type: 'postgrest'
-        },
-        writer: {
-            type: 'json'
-        },
+        // reader: {
+        //     type: 'postgrest'
+        // },
+        // writer: {
+        //     type: 'json'
+        // },
     },
 
-    remoteSort:   true,
-    remoteFilter: true,
+    // remoteSort:   true,
+    // remoteFilter: true,
 
-    sorters: [{
-        property:  'id',
-        direction: 'asc'
-    }],
+    // sorters: [{
+    //     property:  'id',
+    //     direction: 'asc'
+    // }],
 
-    filters: [{
-        property: 'title',
-        operator: 'in',
-        value: ['Pennsylvania', 'New Jersey']
-    }],
+    // filters: [{
+    //     property: 'title',
+    //     operator: 'in',
+    //     value: ['Pennsylvania', 'New Jersey']
+    // }],
 
-    autoSync: true
+    // autoSync: true
 });
