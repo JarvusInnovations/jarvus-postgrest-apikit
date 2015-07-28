@@ -68,9 +68,9 @@ Ext.define('Jarvus.proxy.Postgrest', {
         // noCache: false
     },
 
-    buildUrl: function(request) {
+    getUrl: function(request) {
         var me = this,
-            url = me.getUrl(request),
+            url = me.callParent(arguments),
             action = request.getAction(),
             operation = request.getOperation(),
             records = operation.getRecords(),
