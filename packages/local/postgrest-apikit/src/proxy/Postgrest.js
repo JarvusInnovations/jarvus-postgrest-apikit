@@ -64,12 +64,13 @@ Ext.define('Jarvus.proxy.Postgrest', {
             filterOperators = me.filterOperators,
 
             action = operation.getAction(),
+            isRead = action == 'read',
             records = operation.getRecords(),
             record = records ? records[0] : null,
 
-            sorters = operation.getSorters(),
+            sorters = isRead && operation.getSorters(),
 
-            filters = operation.getFilters(),
+            filters = isRead && operation.getFilters(),
             filtersLength = filters && filters.length, filterIndex = 0,
             filter, filterOperator, filterValue,
 
