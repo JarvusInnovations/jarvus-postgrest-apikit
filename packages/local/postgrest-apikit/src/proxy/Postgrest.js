@@ -2,7 +2,8 @@ Ext.define('Jarvus.proxy.Postgrest', {
     extend: 'Jarvus.proxy.API',
     alias : 'proxy.postgrest',
     requires: [
-        'Jarvus.connection.Postgrest'
+        'Jarvus.connection.Postgrest',
+        'Jarvus.writer.Postgrest'
     ],
 
 
@@ -11,6 +12,13 @@ Ext.define('Jarvus.proxy.Postgrest', {
 
         noCache: false,
 
+        actionMethods: {
+            update: 'PATCH'
+        },
+        
+        writer: {
+            type: 'postgrest'
+        }
         // /**
         //  * @cfg {Boolean} appendId
         //  * True to automatically append the ID of a Model instance when performing a request based on that single instance.
@@ -55,9 +63,34 @@ Ext.define('Jarvus.proxy.Postgrest', {
         // noCache: false
     },
 
+    buildUrl: function(request) {
+        var me = this,
+            url = me.getUrl(request),
+            action = request.getAction(),
+            operation = request.getOperation(),
+            records = operation.getRecords(),
+            record = records ? records[0] : null;
+
+        // debugger;
+        // if (action == 'update') {
+        //     url += '/' + record.getId();
+        // }
+
+        return url;
+    },
+
     getParams: function(operation) {
+        var action = operation.getAction(),
+            records = operation.getRecords(),
+            record = records ? records[0] : null,
+            params = {};
+
         // do not call parent, we don't want any metadata added to the parameters
-        return {};
+        if (action == 'update') {
+            params[record.getIdProperty()] = 'eq.' + record.getId();
+        }
+
+        return params;
     }
 
     // /**

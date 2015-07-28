@@ -34,5 +34,5 @@ Ext.define('PostgrestTest.store.Jurisdictions', {
     //     value: ['Pennsylvania', 'New Jersey']
     // }],
 
-    // autoSync: true
+    autoSync: true
 });
