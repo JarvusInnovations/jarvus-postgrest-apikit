@@ -34,7 +34,16 @@ Ext.define('PostgrestTest.Application', {
         // }});
 
 
-        // demo call: get a list of tables
+    },
+
+    /**
+     * Run from console via `PostgrestTest.app.runDemoCalls()`
+     */
+    runDemoCalls: function() {
+
+        // See Ext.data.Connection docs for all request options: http://docs.sencha.com/extjs/5.1/5.1.1-apidocs/#!/api/Ext.data.Connection-method-request
+
+        // get a list of all tables
         Jarvus.connection.Postgrest.request({
             url: '/',
             success: function(response) {
@@ -117,7 +126,5 @@ Ext.define('PostgrestTest.Application', {
                 foo: 'bar'
             }
         });
-
-        // See Ext.data.Connection docs for all request options: http://docs.sencha.com/extjs/5.1/5.1.1-apidocs/#!/api/Ext.data.Connection-method-request
     }
 });
