@@ -7,9 +7,7 @@ Ext.define('PostgrestTest.Application', {
     extend: 'Ext.app.Application',
 
     requires: [
-        'Jarvus.connection.Postgrest',
-        'Jarvus.proxy.Postgrest',
-        'Jarvus.reader.Postgrest'
+        'Jarvus.connection.Postgrest'
     ],
     
     name: 'PostgrestTest',
