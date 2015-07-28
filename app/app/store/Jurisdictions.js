@@ -1,23 +1,16 @@
 Ext.define('PostgrestTest.store.Jurisdictions', {
     extend: 'Ext.data.Store',
     requires: [
-        'Jarvus.proxy.Postgrest',
-        'Jarvus.reader.Postgrest'
+        'Jarvus.proxy.Postgrest'
     ],
 
     model: 'PostgrestTest.model.Jurisdiction',
 
-    // pageSize: 5,
+    pageSize: 100,
 
     proxy: {
         type: 'postgrest',
-        url:  '/jurisdictions',
-        // reader: {
-        //     type: 'postgrest'
-        // },
-        // writer: {
-        //     type: 'json'
-        // },
+        url:  '/jurisdictions'
     },
 
     // remoteSort:   true,

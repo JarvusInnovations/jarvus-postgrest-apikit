@@ -84,6 +84,29 @@ Ext.define('Jarvus.proxy.Postgrest', {
         return url;
     },
 
+    getHeaders: function(request) {
+        var headers = this.callParent(),
+            action = request.getAction(),
+            operation = request.getOperation(),
+            page, start, limit;
+
+        if (action == 'read') {
+            page = operation.getPage(),
+            start = operation.getStart(),
+            limit = operation.getLimit();
+
+            if (limit && page) {
+                headers['Range-Unit'] = 'items';
+                headers['Range'] = ((page - 1) * limit) + '-' + (start + limit - 1);
+            } else if(start || start === 0 || limit) {
+                headers['Range-Unit'] = 'items';
+                headers['Range'] = (start || 0) + '-' + (limit - 1 || '');
+            }
+        }
+
+        return headers;
+    },
+
     getParams: function(operation) {
         var action = operation.getAction(),
             records = operation.getRecords(),
