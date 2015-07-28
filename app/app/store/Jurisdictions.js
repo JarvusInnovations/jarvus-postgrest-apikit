@@ -20,14 +20,13 @@ Ext.define('PostgrestTest.store.Jurisdictions', {
         direction: 'desc'
     }],
 
-    // remoteFilter: true,
+    remoteFilter: true,
 
-
-    // filters: [{
-    //     property: 'title',
-    //     operator: 'in',
-    //     value: ['Pennsylvania', 'New Jersey']
-    // }],
+    filters: [{
+        property: 'title',
+        operator: 'in',
+        value: ['Pennsylvania', 'New Jersey']
+    }],
 
     autoSync: true
 });
