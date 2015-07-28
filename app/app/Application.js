@@ -17,7 +17,7 @@ Ext.define('PostgrestTest.Application', {
     name: 'PostgrestTest',
 
     stores: [
-        'PostgrestTest.store.Jurisdictions'
+        'Jurisdictions'
     ],
     
     launch: function () {

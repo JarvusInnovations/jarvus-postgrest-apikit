@@ -22,7 +22,7 @@ Ext.define('PostgrestTest.view.main.Main', {
     }],
 
     // gridpanel config
-    store: 'PostgrestTest.store.Jurisdictions',
+    store: 'Jurisdictions',
 
     columns:  [{
         header: 'ID',
