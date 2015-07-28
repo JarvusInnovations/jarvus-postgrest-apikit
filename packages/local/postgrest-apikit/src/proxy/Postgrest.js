@@ -9,6 +9,8 @@ Ext.define('Jarvus.proxy.Postgrest', {
     config: {
         connection: 'Jarvus.connection.Postgrest',
 
+        noCache: false,
+
         // /**
         //  * @cfg {Boolean} appendId
         //  * True to automatically append the ID of a Model instance when performing a request based on that single instance.
@@ -52,6 +54,11 @@ Ext.define('Jarvus.proxy.Postgrest', {
 
         // noCache: false
     },
+
+    getParams: function(operation) {
+        // do not call parent, we don't want any metadata added to the parameters
+        return {};
+    }
 
     // /**
     //  * These parameters are what postgrest requires, they should not be changed:
