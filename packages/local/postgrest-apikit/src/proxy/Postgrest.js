@@ -3,6 +3,7 @@ Ext.define('Jarvus.proxy.Postgrest', {
     alias : 'proxy.postgrest',
     requires: [
         'Jarvus.connection.Postgrest',
+        'Jarvus.reader.Postgrest',
         'Jarvus.writer.Postgrest'
     ],
 
@@ -21,9 +22,8 @@ Ext.define('Jarvus.proxy.Postgrest', {
             Prefer: 'return=representation'
         },
 
-        writer: {
-            type: 'postgrest'
-        }
+        reader: 'postgrest',
+        writer: 'postgrest'
     },
 
     /**

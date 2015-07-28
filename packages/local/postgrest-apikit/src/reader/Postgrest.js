@@ -1,10 +1,24 @@
 Ext.define('Jarvus.reader.Postgrest', {
     extend: 'Ext.data.reader.Json',
-    alternateClassName: 'Jarvus.reader.PostgrestReader',
-    alias : 'reader.postgrest',
+    alias: 'reader.postgrest',
 
-    getTotal: function() {
-        debugger;
-        console.log(this);
+    config: {
+        totalProperty: null,
+        successProperty: null,
+        rootProperty: null,
+        messageProperty: null
+    },
+
+    buildExtractors: Ext.emptyFn,
+
+    read: function(response, readOptions) {
+        var data = this.callParent(arguments),
+            contentRange = response.getResponseHeader('Content-Range');
+
+        if (contentRange && (contentRange = contentRange.split('/')).length == 2) {
+            data.total = parseInt(contentRange[1], 10);
+        }
+
+        return data;
     }
 });
