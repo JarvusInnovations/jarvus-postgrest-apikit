@@ -1,94 +1,87 @@
 Ext.define('PostgrestTest.view.main.Main', {
     extend:   'Ext.grid.Panel',
-
     requires: [
-        'Ext.selection.CellModel',
-        'Ext.grid.*',
-        'Ext.data.*',
-        'Ext.util.*',
-        'Ext.form.*',
-
-        'PostgrestTest.view.main.MainController',
-        'PostgrestTest.view.main.MainModel',
-        'PostgrestTest.model.Jurisdiction',
-        'PostgrestTest.store.Jurisdictions'
+        'Ext.grid.plugin.CellEditing',
+        'Ext.grid.column.Action'
     ],
 
-    xtype: 'cell-editing',
-
-
+    // panel config
     title: 'Edit Jurisdictions',
-    frame: true,
 
-    initComponent: function () {
-
-        this.cellEditing = new Ext.grid.plugin.CellEditing({
-            clicksToEdit: 1
-        });
-
-        Ext.apply(this, {
-            width:    680,
-            height:   350,
-            plugins:  [this.cellEditing],
-            store: PostgrestTest.store.Jurisdictions,
-
-            columns:  [{
-                header:    'ID',
-                dataIndex: 'id',
-                flex:      1
-            }, {
-                header:    'Title',
-                dataIndex: 'title',
-                flex:     3
-            }, {
-                header:    'Type',
-                dataIndex: 'type',
-                flex: 1
-            }, {
-                header:    'Document',
-                dataIndex: 'document'
-            }],
-            selModel: {
-                selType: 'cellmodel'
-            },
-            tbar:     [{
-                text:    'Add Jurisdiction',
-                scope:   this,
-                handler: this.onAddClick
-            }]
-        });
-
-        this.callParent();
-
-        if (Ext.supports.Touch) {
-            this.addDocked({
-                xtype: 'header',
-                title: '<b>Note that cell editing is not recommeded on keyboardless touch devices.</b>'
+    tbar: [{
+        text: 'Add Jurisdiction',
+        action: 'jurisdiction-add',
+        handler: function() {
+            var gridPanel = this.up('gridpanel');
+            gridPanel.getStore().insert(0, {
+                id: 0
+            });
+            gridPanel.getPlugin('cellediting').startEditByPosition({
+                row: 0,
+                column: 0
             });
         }
+    }],
 
-        this.on('afterlayout', this.loadStore, this, {
-            delay:  1,
-            single: true
-        });
+    // gridpanel config
+    store: 'PostgrestTest.store.Jurisdictions',
+
+    columns:  [{
+        header: 'ID',
+        dataIndex: 'id',
+        flex: 1,
+        editor: {
+            xtype: 'numberfield',
+            minValue: -1,
+            selectOnFocus: true
+        }
+    },{
+        header: 'Title',
+        dataIndex: 'title',
+        flex: 3,
+        editor: 'textfield'
+    },{
+        header: 'Type',
+        dataIndex: 'type',
+        flex: 1
+    },{
+        header: 'Document',
+        dataIndex: 'document'
+    },{
+        xtype: 'actioncolumn',
+        // width: 50,
+        items: [{
+            icon: 'http://i.imgur.com/wb1NW8I.png',  // Use a URL in the icon config
+            tooltip: 'Edit',
+            handler: function(gridView, rowIndex, colIndex) {
+                gridView.grid.getPlugin('cellediting').startEditByPosition({
+                    row: rowIndex,
+                    column: 0
+                });
+            }
+        },{
+            icon: 'http://i.imgur.com/wb1NW8I.png',
+            tooltip: 'Delete',
+            handler: function(grid, rowIndex, colIndex) {
+                grid.getStore().removeAt(rowIndex);
+            }
+        }]
+    }],
+
+    selModel: {
+        selType: 'cellmodel'
     },
 
-    loadStore: function () {
-        this.getStore().load();
-    },
+    plugins: [{
+        pluginId: 'cellediting',
+        ptype: 'cellediting',
+        clicksToEdit: 1
+    }],
 
-    onAddClick: function () {
-        var rec = new PostgrestTest.model.Jurisdiction({});
-
-        this.getStore().insert(0, rec);
-
-        this.cellEditing.startEditByPosition({
-            row:    0,
-            column: 0
-        });
-    },
-
-    onRemoveClick: function (grid, rowIndex) {
-        this.getStore().removeAt(rowIndex);
+    // temporary inline listeners
+    listeners: {
+        boxready: function() {
+            this.getStore().load();
+        }
     }
 });
