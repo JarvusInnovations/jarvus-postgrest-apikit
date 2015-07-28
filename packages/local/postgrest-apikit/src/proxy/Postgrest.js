@@ -95,11 +95,11 @@ Ext.define('Jarvus.proxy.Postgrest', {
                 filterOperator = filter.getOperator() || 'eq';
                 filterValue = filter.getValue();
 
-                if (filterOperators.indexOf(filterOperator) === -1) {
+                if (filterOperators.indexOf(filterOperator) == -1) {
                     Ext.Error.raise(filterOperators + ' is not in the list of supported filter operators: ' +  me.filterOperators.join(','));
                 }
 
-                if (filterOperator === 'in') {
+                if (filterOperator == 'in') {
                     if (!Ext.isArray(filterValue)) {
                         Ext.Error.raise('the in filter operator requires values to be an array, not: ' + filterValue);
                     }
