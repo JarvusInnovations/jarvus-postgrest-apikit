@@ -33,7 +33,9 @@ Ext.define('PostgrestTest.Application', {
         //     }]);
         // }});
 
-
+        // export fun stuff to global for console
+        window.jurisdictionsStore = this.getJurisdictionsStore();
+        window.jurisdictionsGrid = this.getMainView();
     },
 
     /**
