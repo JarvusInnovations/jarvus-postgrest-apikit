@@ -9,8 +9,6 @@ Ext.define('PostgrestTest.store.Jurisdictions', {
 
     model: 'PostgrestTest.model.Jurisdiction',
 
-    idProperty: 'id',
-
     pageSize: 5,
 
     proxy: {
