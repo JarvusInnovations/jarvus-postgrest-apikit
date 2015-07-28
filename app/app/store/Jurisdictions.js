@@ -1,8 +1,6 @@
 Ext.define('PostgrestTest.store.Jurisdictions', {
     extend: 'Ext.data.Store',
-
     requires: [
-        'PostgrestTest.model.Jurisdiction',
         'Jarvus.proxy.Postgrest',
         'Jarvus.reader.Postgrest'
     ],
