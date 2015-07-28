@@ -9,5 +9,17 @@ Ext.define('Jarvus.connection.AbstractPostgrest', {
 	config: {
         host: 'localhost:3000',
 		withCredentials: false
+    },
+
+	getTables: function(callback, scope) {
+        this.request({
+            url: '/',
+            success: function(response) {
+                Ext.callback(callback, scope, [response.data, true, response]);
+            },
+            exception: function(response) {
+                Ext.callback(callback, scope, [null, false, response]);
+            }
+        });
     }
 });
