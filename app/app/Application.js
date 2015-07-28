@@ -1,3 +1,4 @@
+/* global Jarvus */
 /**
  * The main application class. An instance of this class is created by app.js when it calls
  * Ext.application(). This is the ideal place to handle application launch and initialization
@@ -15,7 +16,15 @@ Ext.define('PostgrestTest.Application', {
     stores: [
         'Jurisdictions'
     ],
-    
+
+    init: function() {
+        var pageParams = Ext.Object.fromQueryString(location.search);
+
+        if (pageParams.postgrestHost) {
+            Jarvus.connection.Postgrest.setHost(pageParams.postgrestHost);
+        }
+    },
+
     launch: function () {
         // Ext.getStore('PostgrestTest.store.Jurisdictions').load({callback: function loaded() {
         //     debugger;
