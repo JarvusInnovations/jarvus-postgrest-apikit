@@ -13,7 +13,8 @@ Ext.define('Jarvus.proxy.Postgrest', {
         noCache: false,
 
         actionMethods: {
-            update: 'PATCH'
+            update: 'PATCH',
+            destroy: 'DELETE'
         },
 
         headers: {
@@ -90,7 +91,7 @@ Ext.define('Jarvus.proxy.Postgrest', {
             params = {};
 
         // do not call parent, we don't want any metadata added to the parameters
-        if (action == 'update') {
+        if (action == 'update' || action == 'destroy') {
             params[record.getIdProperty()] = 'eq.' + record.getId();
         }
 
