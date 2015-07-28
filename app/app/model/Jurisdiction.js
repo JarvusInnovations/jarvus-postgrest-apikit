@@ -19,6 +19,6 @@ Ext.define('PostgrestTest.model.Jurisdiction', {
             validators: 'presence'
         },
         { name: 'type', type: 'string' },
-        { name: 'document', type: 'string' }
+        { name: 'document' }
     ]
 });
