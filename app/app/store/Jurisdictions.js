@@ -12,12 +12,12 @@ Ext.define('PostgrestTest.store.Jurisdictions', {
     proxy: {
         type: 'postgrest',
         url:  '/jurisdictions',
-    reader: {
-        type: 'postgrest'
-    },
-    writer: {
-        type: 'json'
-    },
+        reader: {
+            type: 'postgrest'
+        },
+        writer: {
+            type: 'json'
+        },
     },
 
     remoteSort:   true,
@@ -31,7 +31,7 @@ Ext.define('PostgrestTest.store.Jurisdictions', {
     filters: [{
         property: 'title',
         operator: 'in',
-        value:    ['Pennsylvania', 'New Jersey']
+        value: ['Pennsylvania', 'New Jersey']
     }],
 
     autoSync: true
