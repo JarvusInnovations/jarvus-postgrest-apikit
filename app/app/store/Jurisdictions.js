@@ -13,13 +13,15 @@ Ext.define('PostgrestTest.store.Jurisdictions', {
         url:  '/jurisdictions'
     },
 
-    // remoteSort:   true,
+    remoteSort: true,
+
+    sorters: [{
+        property: 'id',
+        direction: 'desc'
+    }],
+
     // remoteFilter: true,
 
-    // sorters: [{
-    //     property:  'id',
-    //     direction: 'asc'
-    // }],
 
     // filters: [{
     //     property: 'title',

@@ -108,8 +108,10 @@ Ext.define('Jarvus.proxy.Postgrest', {
     },
 
     getParams: function(operation) {
-        var action = operation.getAction(),
+        var me = this,
+            action = operation.getAction(),
             records = operation.getRecords(),
+            sorters = operation.getSorters(),
             record = records ? records[0] : null,
             params = {};
 
@@ -118,8 +120,33 @@ Ext.define('Jarvus.proxy.Postgrest', {
             params[record.getIdProperty()] = 'eq.' + record.getId();
         }
 
+        if (sorters && sorters.length > 0) {
+            params.order = me.encodeSorters(sorters);
+        }
+
         return params;
-    }
+    },
+
+    encodeSorters: function(sorters) {
+        return sorters.map(function(sorter) {
+            var direction = sorter.getDirection(),
+                sortStr = sorter.getProperty();
+
+            if (direction) {
+                sortStr += '.' + direction.toLowerCase();
+            }
+
+            if (sorter.nullsFirst) {
+                sortStr += '.nullsfirst';
+            }
+
+            if (sorter.nullsLast) {
+                sortStr += '.nullslast';
+            }
+
+            return sortStr;
+        }).join(',');
+    },
 
     // /**
     //  * These parameters are what postgrest requires, they should not be changed:
