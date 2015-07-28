@@ -15,7 +15,7 @@ Ext.define('PostgrestTest.store.Jurisdictions', {
 
     proxy: {
         type: 'postgrest',
-        url:  'http://localhost:3000/jurisdictions'
+        url:  '/jurisdictions'
     },
 
     reader: {
