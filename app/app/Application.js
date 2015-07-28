@@ -27,8 +27,26 @@ Ext.define('PostgrestTest.Application', {
 
     launch: function () {
         // export fun stuff to global for console
-        window.jurisdictionsStore = this.getJurisdictionsStore();
-        window.jurisdictionsGrid = this.getMainView();
+        console.group('Exporting to window for console use')
+        console.info('jurisdictionsStore:', window.jurisdictionsStore = this.getJurisdictionsStore());
+        console.info('jurisdictionsGrid:', window.jurisdictionsGrid = this.getMainView());
+        console.groupEnd();
+
+        Jarvus.connection.Postgrest.getTables(function(tables, success, response) {
+            console.groupCollapsed('All available tables on', Jarvus.connection.Postgrest.getHost());
+            console.table(tables);
+            console.groupEnd();
+        });
+
+        Jarvus.connection.Postgrest.request({
+            method: 'OPTIONS',
+            url: '/jurisdictions',
+            success: function(response) {
+                console.groupCollapsed('Columns for /jurisdictions');
+                console.table(response.data.columns);
+                console.groupEnd();
+            }
+        });
     },
 
     /**
