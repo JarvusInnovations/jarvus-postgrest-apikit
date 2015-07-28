@@ -77,7 +77,7 @@ Ext.define('Jarvus.proxy.Postgrest', {
             sorters = operation.getSorters(),
 
             filters = operation.getFilters(),
-            filtersLength = filters.length, filterIndex = 0,
+            filtersLength = filters && filters.length, filterIndex = 0,
             filter, filterOperator, filterValue,
 
             params = {};
@@ -90,7 +90,7 @@ Ext.define('Jarvus.proxy.Postgrest', {
         }
 
         // write filters
-        if (filters && filters.length) {
+        if (filtersLength) {
             for (; filterIndex < filtersLength; filterIndex++) {
                 filter = filters[filterIndex];
                 filterOperator = filter.getOperator() || 'eq';
