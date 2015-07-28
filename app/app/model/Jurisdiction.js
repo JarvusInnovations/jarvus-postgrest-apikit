@@ -11,10 +11,7 @@ Ext.define('PostgrestTest.model.Jurisdiction', {
         {
             name: 'id',
             type: 'int',
-            validators: {
-                type: 'range',
-                min: 1
-            }
+            persist: false
         },
         {
             name: 'title',

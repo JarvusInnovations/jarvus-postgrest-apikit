@@ -13,12 +13,10 @@ Ext.define('PostgrestTest.view.main.Main', {
         action: 'jurisdiction-add',
         handler: function() {
             var gridPanel = this.up('gridpanel');
-            gridPanel.getStore().insert(0, {
-                id: 0
-            });
+            gridPanel.getStore().insert(0, {});
             gridPanel.getPlugin('cellediting').startEditByPosition({
                 row: 0,
-                column: 0
+                column: 1
             });
         }
     }],
@@ -30,10 +28,8 @@ Ext.define('PostgrestTest.view.main.Main', {
         header: 'ID',
         dataIndex: 'id',
         flex: 1,
-        editor: {
-            xtype: 'numberfield',
-            minValue: -1,
-            selectOnFocus: true
+        renderer: function(v) {
+            return v > 0 ? v : '';
         }
     },{
         header: 'Title',
@@ -56,7 +52,7 @@ Ext.define('PostgrestTest.view.main.Main', {
             handler: function(gridView, rowIndex, colIndex) {
                 gridView.grid.getPlugin('cellediting').startEditByPosition({
                     row: rowIndex,
-                    column: 0
+                    column: 1
                 });
             }
         },{
