@@ -11,13 +11,6 @@ Ext.define('Jarvus.proxy.Postgrest', {
     config: {
         connection: 'Jarvus.connection.Postgrest',
 
-        noCache: false,
-
-        actionMethods: {
-            update: 'PATCH',
-            destroy: 'DELETE'
-        },
-
         headers: {
             Prefer: 'return=representation'
         },
