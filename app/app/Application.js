@@ -68,5 +68,56 @@ Ext.define('PostgrestTest.Application', {
                 console.log('Loaded one jurisdiction:', r[0]);
             }
         });
+
+        // custom headers
+        Jarvus.connection.Postgrest.request({
+            url: '/custom-headers',
+            headers: {
+                'X-Foo': 'bar'
+            }
+        });
+
+        // raw method and body
+        Jarvus.connection.Postgrest.request({
+            method: 'PATCH',
+            url: '/raw-data',
+            headers: {
+                'Content-Type': 'application/foobar'
+            },
+            rawData: 'FOO____BAR'
+        });
+
+        // post multipart form data
+        var formData = new FormData();
+        formData.append('foo', new File(['line1','line2','line3'], 'foobar.txt', {'type': 'text/plain'})); // could get file from a drop or <input type="file">
+
+        Jarvus.connection.Postgrest.request({
+            method: 'POST',
+            url: '/multipart-form-data',
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            rawData: formData
+        });
+
+        // post a javascript object
+        Jarvus.connection.Postgrest.request({
+            method: 'POST',
+            url: '/json-data',
+            jsonData: {
+                foo: 'bar'
+            }
+        });
+
+        // post form data
+        Jarvus.connection.Postgrest.request({
+            method: 'POST',
+            url: '/form-data',
+            params: {
+                foo: 'bar'
+            }
+        });
+
+        // See Ext.data.Connection docs for all request options: http://docs.sencha.com/extjs/5.1/5.1.1-apidocs/#!/api/Ext.data.Connection-method-request
     }
 });
