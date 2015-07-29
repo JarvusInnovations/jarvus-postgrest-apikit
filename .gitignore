@@ -2,3 +2,4 @@
 /build
 /app/bootstrap.*
 /app/sass/example/bootstrap.*
+ext/
