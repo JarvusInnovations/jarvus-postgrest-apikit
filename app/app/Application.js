@@ -17,17 +17,6 @@ Ext.define('PostgrestTest.Application', {
         'Jurisdictions'
     ],
 
-    init: function() {
-        var pageParams = Ext.Object.fromQueryString(location.search);
-
-        if (pageParams.postgrestHost) {
-            Jarvus.connection.Postgrest.setHost(pageParams.postgrestHost);
-        } else {
-            Jarvus.connection.Postgrest.setHost('staging.sparkpoint.slatepowered.net');
-            Jarvus.connection.Postgrest.setPathPrefix('/spark2/postgrest');
-        }
-    },
-
     launch: function () {
         // export fun stuff to global for console
         console.group('Exporting to window for console use')
