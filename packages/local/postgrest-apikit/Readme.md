@@ -1,2 +1,0 @@
-# postgrest-apikit - Read Me
-

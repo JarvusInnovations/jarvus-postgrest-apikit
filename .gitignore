@@ -1,5 +1,6 @@
 .idea
 build/
-/app/bootstrap.*
-/app/sass/example/bootstrap.*
-ext/
+/examples/*/bootstrap.*
+**/sass/example/bootstrap.*
+**/sass/example/example.css
+ext-*/
