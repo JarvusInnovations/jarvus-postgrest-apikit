@@ -2,7 +2,7 @@
     /**
      * The name of the package.
      */
-    "name": "postgrest-apikit",
+    "name": "jarvus-postgrest-apikit",
 
     /**
      * Alternate names for this package.
