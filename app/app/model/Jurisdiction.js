@@ -1,24 +1,5 @@
 Ext.define('PostgrestTest.model.Jurisdiction', {
-    extend: 'Ext.data.Model',
-    requires: [
-        'Ext.data.identifier.Negative'
-    ],
+    extend: 'Jarvus.model.Postgrest',
 
-
-    identifier: 'negative',
-
-    fields: [
-        {
-            name: 'id',
-            type: 'int',
-            persist: false
-        },
-        {
-            name: 'title',
-            type: 'string',
-            validators: 'presence'
-        },
-        { name: 'type', type: 'string' },
-        { name: 'document' }
-    ]
+    path: '/jurisdictions'
 });
