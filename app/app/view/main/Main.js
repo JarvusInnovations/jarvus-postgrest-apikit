@@ -44,6 +44,12 @@ Ext.define('PostgrestTest.view.main.Main', {
         header: 'Document',
         dataIndex: 'document'
     },{
+        header: 'Document Keys',
+        dataIndex: 'documentKeys',
+        renderer: function(v) {
+            return v.join(', ');
+        }
+    },{
         xtype: 'actioncolumn',
         // width: 50,
         items: [{
