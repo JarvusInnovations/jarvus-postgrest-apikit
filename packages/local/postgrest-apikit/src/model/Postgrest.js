@@ -2,6 +2,7 @@ Ext.define('Jarvus.model.Postgrest', {
     extend: 'Ext.data.Model',
     requires: [
         'Jarvus.connection.Postgrest',
+        'Jarvus.proxy.Postgrest',
         'Ext.data.identifier.Negative'
     ],
 
@@ -14,6 +15,13 @@ Ext.define('Jarvus.model.Postgrest', {
 
         if (!modelPath) {
             throw modelCls.$className + ' attempting to extend ' + this.$className + ' without defining path';
+        }
+
+        if (!modelCls.proxyConfig) {
+            modelCls.proxyConfig = {
+                type: 'postgrest',
+                url: modelPath
+            };
         }
 
         hooks.onBeforeCreated = function() {
