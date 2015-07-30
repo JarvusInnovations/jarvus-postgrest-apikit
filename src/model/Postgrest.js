@@ -11,38 +11,46 @@ Ext.define('Jarvus.model.Postgrest', {
 
     onClassExtended: function(modelCls, data, hooks) {
         var onBeforeClassCreated = hooks.onBeforeCreated,
-            modelPath = data.path;
+            tableUrl = data.tableUrl,
+            modelProxy;
 
-        if (!modelPath) {
+        if (!tableUrl) {
             throw modelCls.$className + ' attempting to extend ' + this.$className + ' without defining path';
         }
 
         if (!modelCls.proxyConfig) {
-            modelCls.proxyConfig = {
-                type: 'postgrest',
-                url: modelPath
-            };
+            modelCls.proxyConfig = 'postgrest';
+        }
+
+        modelProxy = modelCls.getProxy();
+
+        if (modelProxy instanceof Jarvus.proxy.Postgrest) {
+            modelProxy.setUrl(tableUrl);
         }
 
         hooks.onBeforeCreated = function() {
             var me = this,
-                args = arguments;
+                args = arguments,
+                idFieldFound = 'id' in modelCls.fieldsMap,
+                idProperty = modelCls.idProperty;
 
             // TODO: cache in localStorage?
             Jarvus.connection.Postgrest.request({
                 method: 'OPTIONS',
-                url: modelPath,
+                url: tableUrl,
                 success: function(response) {
                     var columns = response.data.columns,
-                        columnsLength = columns.length, columnIndex = 0, column, field,
+                        columnsLength = columns.length, columnIndex = 0, column, columnName, field,
                         fields = [];
 
                     for (; columnIndex < columnsLength; columnIndex++) {
                         column = columns[columnIndex];
+                        columnName = column.name;
+
                         field = {
                             postgrestColumn: column,
 
-                            name: column.name,
+                            name: columnName,
                             allowNull: column.nullable,
                             persist: column.updatable
                         };
@@ -58,6 +66,22 @@ Ext.define('Jarvus.model.Postgrest', {
                         }
 
                         fields.push(field);
+
+                        if (columnName == 'id') {
+                            idFieldFound = true;
+                        }
+                    }
+
+                    // ensure an 'id' field exists or addFields/replaceFields will shit the bed: https://www.sencha.com/forum/showthread.php?303756
+                    if (!idFieldFound) {
+                        fields.push({
+                            name: 'id',
+                            persist: false,
+                            depends: [idProperty],
+                            convert: function(v, r) {
+                                return r.get(idProperty);
+                            }
+                        });
                     }
 
                     modelCls.addFields(fields);
