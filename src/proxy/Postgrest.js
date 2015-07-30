@@ -151,7 +151,7 @@ Ext.define('Jarvus.proxy.Postgrest', {
         if (idParam && operationId && params[idParam] == operationId) {
             params[idParam] = 'eq.' + operationId
         } else if (idParam === null && 'null' in params) {
-            delete params.null;
+            delete params['null'];
         }
 
         return request;
