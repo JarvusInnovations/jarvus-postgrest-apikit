@@ -138,5 +138,22 @@ Ext.define('Jarvus.proxy.Postgrest', {
 
             return sortStr;
         }).join(',');
+    },
+
+    buildRequest: function(operation) {
+        var me = this,
+            request = me.callParent(arguments),
+            params = request.getParams(),
+            idParam = me.getIdParam(),
+            operationId = operation.getId();
+
+        // proxy.Server sets this regardless of idParam's value, see https://www.sencha.com/forum/showthread.php?303751
+        if (idParam && operationId && params[idParam] == operationId) {
+            params[idParam] = 'eq.' + operationId
+        } else if (idParam === null && 'null' in params) {
+            delete params.null;
+        }
+
+        return request;
     }
 });
