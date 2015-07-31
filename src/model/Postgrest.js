@@ -8,6 +8,7 @@ Ext.define('Jarvus.model.Postgrest', {
 
 
     identifier: 'negative',
+    fetchRemoteFields: false,
 
     onClassExtended: function(modelCls, data, hooks) {
         var onBeforeClassCreated = hooks.onBeforeCreated,
@@ -28,6 +29,10 @@ Ext.define('Jarvus.model.Postgrest', {
             modelProxy.setUrl(tableUrl);
         }
 
+        // automatically fetch fields from server
+        if (!data.fetchRemoteFields) {
+            return;
+        }
         hooks.onBeforeCreated = function() {
             var me = this,
                 args = arguments,
