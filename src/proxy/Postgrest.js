@@ -21,7 +21,8 @@ Ext.define('Jarvus.proxy.Postgrest', {
         },
 
         reader: 'postgrest',
-        writer: 'postgrest'
+        writer: 'postgrest',
+        sortParam: 'order'
     },
 
     /**
@@ -74,6 +75,7 @@ Ext.define('Jarvus.proxy.Postgrest', {
             record = records ? records[0] : null,
 
             sorters = isRead && operation.getSorters(),
+            sortParam = me.getSortParam(),
 
             filters = isRead && operation.getFilters(),
             filtersLength = filters && filters.length, filterIndex = 0,
@@ -84,8 +86,8 @@ Ext.define('Jarvus.proxy.Postgrest', {
         // do not call parent, we don't want any metadata added to the parameters
 
         // handle remote sorting
-        if (sorters && sorters.length > 0) {
-            params.order = me.encodeSorters(sorters);
+        if (sortParam && sorters && sorters.length > 0) {
+            params[sortParam] = me.encodeSorters(sorters);
         }
 
         // write filters
