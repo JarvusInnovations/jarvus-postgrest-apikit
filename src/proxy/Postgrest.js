@@ -152,8 +152,6 @@ Ext.define('Jarvus.proxy.Postgrest', {
         // proxy.Server sets this regardless of idParam's value, see https://www.sencha.com/forum/showthread.php?303751
         if (idParam && operationId && params[idParam] == operationId) {
             params[idParam] = 'eq.' + operationId
-        } else if (!idParam && idParam in params) {
-            delete params[idParam];
         }
 
         return request;
