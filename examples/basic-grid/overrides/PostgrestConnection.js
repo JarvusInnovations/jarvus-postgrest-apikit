@@ -7,7 +7,8 @@ Ext.define('PostgrestTest.overrides.PostgrestConnection', {
     if (pageParams.postgrestHost) {
         PostgrestConnection.setHost(pageParams.postgrestHost);
     } else {
-        PostgrestConnection.setHost('staging.sparkpoint.slatepowered.net');
-        PostgrestConnection.setPathPrefix('/spark2/postgrest');
+        PostgrestConnection.setUseSSL(true);
+        PostgrestConnection.setHost('postgrest.herokuapp.com');
+        // PostgrestConnection.setPathPrefix('/path/to/optional/proxy');
     }
 });
