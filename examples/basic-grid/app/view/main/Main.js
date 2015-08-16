@@ -6,11 +6,11 @@ Ext.define('PostgrestTest.view.main.Main', {
     ],
 
     // panel config
-    title: 'Edit Jurisdictions',
+    title: 'Edit Speakers',
 
     tbar: [{
-        text: 'Add Jurisdiction',
-        action: 'jurisdiction-add',
+        text: 'Add Speaker',
+        action: 'add',
         handler: function() {
             var gridPanel = this.up('gridpanel');
             gridPanel.getStore().insert(0, {});
@@ -22,32 +22,57 @@ Ext.define('PostgrestTest.view.main.Main', {
     }],
 
     // gridpanel config
-    store: 'Jurisdictions',
+    store: 'Speakers',
 
     columns:  [{
         header: 'ID',
         dataIndex: 'id',
-        flex: 1,
+        width: 50,
         renderer: function(v) {
             return v > 0 ? v : '';
         }
     },{
-        header: 'Title',
-        dataIndex: 'title',
-        flex: 3,
+        header: 'Name',
+        dataIndex: 'name',
+        flex: 2,
         editor: 'textfield'
     },{
-        header: 'Type',
-        dataIndex: 'type',
-        flex: 1
-    },{
-        header: 'Document',
-        dataIndex: 'document'
-    },{
-        header: 'Document Keys',
-        dataIndex: 'documentKeys',
+        header: 'Twitter',
+        dataIndex: 'twitter',
+        flex: 1,
+        editor: {
+            xtype: 'textfield',
+            regex: /^@?(\w){1,15}$/
+        },
         renderer: function(v) {
-            return v.join(', ');
+            if (!v) {
+                return '';
+            }
+
+            if (v[0] != '@') {
+                v = '@' + v;
+            }
+
+            return '<a href="https://twitter.com/'+v.substr(1)+'">'+v+'</a>';
+        }
+    },{
+        xtype: 'templatecolumn',
+        header: 'Avatar',
+        width: 75,
+        tpl: [
+            '<tpl if="avatar_url">',
+                '<img src="{avatar_url}" width="50">',
+            '<tpl else>',
+                '&mdash;',
+            '</tpl>'
+        ]
+    },{
+        header: 'Avatar URL',
+        dataIndex: 'avatar_url',
+        flex: 3,
+        editor: {
+            xtype: 'textfield',
+            vtype: 'url'
         }
     },{
         xtype: 'actioncolumn',

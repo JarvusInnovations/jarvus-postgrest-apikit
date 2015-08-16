@@ -14,14 +14,14 @@ Ext.define('PostgrestTest.Application', {
     name: 'PostgrestTest',
 
     stores: [
-        'Jurisdictions'
+        'Speakers'
     ],
 
     launch: function () {
         // export fun stuff to global for console
         console.group('Exporting to window for console use')
-        console.info('jurisdictionsStore:', window.jurisdictionsStore = this.getJurisdictionsStore());
-        console.info('jurisdictionsGrid:', window.jurisdictionsGrid = this.getMainView());
+        console.info('speakersStore:', window.speakersStore = this.getSpeakersStore());
+        console.info('speakersGrid:', window.speakersGrid = this.getMainView());
         console.groupEnd();
 
         Jarvus.connection.Postgrest.getTables(function(tables, success, response) {
@@ -32,9 +32,9 @@ Ext.define('PostgrestTest.Application', {
 
         Jarvus.connection.Postgrest.request({
             method: 'OPTIONS',
-            url: '/jurisdictions',
+            url: '/speakers',
             success: function(response) {
-                console.groupCollapsed('Columns for /jurisdictions');
+                console.groupCollapsed('Columns for /speakers');
                 console.table(response.data.columns);
                 console.groupEnd();
             }
@@ -59,27 +59,27 @@ Ext.define('PostgrestTest.Application', {
             }
         });
 
-        // load all jurisdictions
+        // load all speakers
         Jarvus.connection.Postgrest.request({
-            url: '/jurisdictions',
+            url: '/speakers',
             success: function(response) {
                 var r = Ext.decode(response.responseText);
 
-                console.log('Loaded list of jurisdictions');
+                console.log('Loaded list of speakers');
                 console.table(r);
             }
         });
         
-        // load one jurisdiction
+        // load one speakers
         Jarvus.connection.Postgrest.request({
-            url: '/jurisdictions',
+            url: '/speakers',
             urlParams: {
                 id: 'eq.3'
             },
             success: function(response) {
                 var r = Ext.decode(response.responseText);
 
-                console.log('Loaded one jurisdiction:', r[0]);
+                console.log('Loaded one speakers:', r[0]);
             }
         });
 
