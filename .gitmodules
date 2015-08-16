@@ -1,8 +1,8 @@
 [submodule "packages/jarvus-apikit"]
 	path = packages/jarvus-apikit
-	url = git@github.com:JarvusInnovations/jarvus-apikit.git
+	url = https://github.com/JarvusInnovations/jarvus-apikit.git
 	branch = master
 [submodule "packages/jarvus-hotfixes"]
 	path = packages/jarvus-hotfixes
-	url = git@github.com:JarvusInnovations/sencha-hotfixes.git
+	url = https://github.com/JarvusInnovations/sencha-hotfixes.git
 	branch = ext/5/1/1/451
