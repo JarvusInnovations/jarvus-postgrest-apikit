@@ -73,7 +73,7 @@ Ext.define('Jarvus.model.Postgrest', {
                         field = new Ext.data.field.Field(fieldConfig);
 
                         // If not nullable & no default value, set 'presence' validation on model
-                        if( ! column.nullable && ! column.default) {
+                        if( ! column.nullable && ! column['default']) {
                             field.setModelValidators('presence');
                         }
 
