@@ -3,7 +3,8 @@ Ext.define('Jarvus.model.Postgrest', {
     requires: [
         'Jarvus.connection.Postgrest',
         'Jarvus.proxy.Postgrest',
-        'Ext.data.identifier.Negative'
+        'Ext.data.identifier.Negative',
+        'Ext.data.validator.Presence'
     ],
 
 
@@ -45,14 +46,14 @@ Ext.define('Jarvus.model.Postgrest', {
                 url: tableUrl,
                 success: function(response) {
                     var columns = response.data.columns,
-                        columnsLength = columns.length, columnIndex = 0, column, columnName, field,
+                        columnsLength = columns.length, columnIndex = 0, column, columnName, field, fieldConfig,
                         fields = [];
 
                     for (; columnIndex < columnsLength; columnIndex++) {
                         column = columns[columnIndex];
                         columnName = column.name;
 
-                        field = {
+                        fieldConfig = {
                             postgrestColumn: column,
 
                             name: columnName,
@@ -63,11 +64,18 @@ Ext.define('Jarvus.model.Postgrest', {
                         switch (column.type) {
                             case 'character varying':
                             case 'string':
-                                field.type = 'string';
+                                fieldConfig.type = 'string';
                                 break;
                             case 'integer':
-                                field.type = 'integer';
+                                fieldConfig.type = 'integer';
                                 break;
+                        }
+
+                        field = new Ext.data.field.Field(fieldConfig);
+
+                        // If not nullable & no default value, set 'presence' validation on model
+                        if( ! column.nullable && ! column['default']) {
+                            field.setModelValidators('presence');
                         }
 
                         fields.push(field);
