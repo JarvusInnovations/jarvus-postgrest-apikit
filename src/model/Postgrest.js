@@ -3,7 +3,8 @@ Ext.define('Jarvus.model.Postgrest', {
     requires: [
         'Jarvus.connection.Postgrest',
         'Jarvus.proxy.Postgrest',
-        'Ext.data.identifier.Negative'
+        'Ext.data.identifier.Negative',
+        'Ext.data.validator.Presence'
     ],
 
 
