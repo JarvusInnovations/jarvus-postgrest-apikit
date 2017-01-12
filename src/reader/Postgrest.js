@@ -11,11 +11,11 @@ Ext.define('Jarvus.reader.Postgrest', {
 
     buildExtractors: Ext.emptyFn,
 
-    read: function(response, readOptions) {
+    read: function(response) {
         var data = this.callParent(arguments),
             contentRange = response.getResponseHeader('Content-Range');
 
-        if (contentRange && (contentRange = contentRange.split('/')).length == 2) {
+        if (contentRange && (contentRange = contentRange.split('/')).length === 2) {
             data.total = parseInt(contentRange[1], 10);
         }
 

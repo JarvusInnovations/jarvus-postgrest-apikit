@@ -1,5 +1,3 @@
-/*jslint browser: true, undef: true*//*global Ext*/
-
 /**
  * Default connection to Postgrest server
  */

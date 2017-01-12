@@ -1,9 +1,11 @@
 Ext.define('Jarvus.model.Postgrest', {
     extend: 'Ext.data.Model',
     requires: [
+        'Ext.data.identifier.Negative',
+
+        /* global Jarvus */
         'Jarvus.connection.Postgrest',
-        'Jarvus.proxy.Postgrest',
-        'Ext.data.identifier.Negative'
+        'Jarvus.proxy.Postgrest'
     ],
 
 
@@ -16,7 +18,7 @@ Ext.define('Jarvus.model.Postgrest', {
             modelProxy;
 
         if (!tableUrl) {
-            throw modelCls.$className + ' attempting to extend ' + this.$className + ' without defining path';
+            throw new Error(modelCls.$className + ' attempting to extend ' + this.$className + ' without defining path');
         }
 
         if (!modelCls.proxyConfig) {
@@ -68,11 +70,14 @@ Ext.define('Jarvus.model.Postgrest', {
                             case 'integer':
                                 field.type = 'integer';
                                 break;
+                            default:
+                                // leave type unset so no conversion is applied
+                                break;
                         }
 
                         fields.push(field);
 
-                        if (columnName == 'id') {
+                        if (columnName === 'id') {
                             idFieldFound = true;
                         }
                     }
